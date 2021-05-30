@@ -34,7 +34,7 @@ public class CYK {
 		//arquivo.imprimirMatriz();
 		al.cyk();
 		al.imprimirMatrizD();
-		//al.imprimirMatrizR();
+		al.imprimirMatrizR();
 	}
 
 }
