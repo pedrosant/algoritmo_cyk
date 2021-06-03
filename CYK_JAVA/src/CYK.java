@@ -4,7 +4,7 @@ public class CYK {
 	public static void main(String[] args) {
 		
 		String caminho = "D:\\8º Período\\LFA\\2º Unidade\\arquivoTeste.txt";
-		String linguagem = "abaab";
+		String linguagem = "abcde";
 		
 		LerArquivo arquivo  = new LerArquivo();
 		Algoritmo al = new Algoritmo();
@@ -33,8 +33,10 @@ public class CYK {
 		//arquivo.limparMatriz();
 		//arquivo.imprimirMatriz();
 		al.cyk();
-		al.imprimirMatrizD();
-		al.imprimirMatrizR();
+		//al.imprimirMatrizD();
+		//al.imprimirMatrizR();
+		
+		
 	}
 
 }
