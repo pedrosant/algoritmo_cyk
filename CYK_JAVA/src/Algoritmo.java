@@ -26,7 +26,7 @@ public class Algoritmo {
 		
 		
 		numeroColunasNovaMatriz = enxugarMatriz();
-		System.out.println("Número de colunas: " + numeroColunasNovaMatriz);
+		//System.out.println("Número de colunas: " + numeroColunasNovaMatriz);
 		
 		/*Intancia matriz de Resposta*/
 		if(travaCriarMatrizR == false) {
@@ -34,20 +34,66 @@ public class Algoritmo {
 			travaCriarMatrizR = true;
 		}		
 		
-		// Preenchimento da primeira parte
-		for(int i = 0; i < linguagem.toCharArray().length; i++) {			
-			char valor = linguagem.charAt(i);
-			for (int j = 0; j < totalLinha; j++) {
-				for (int k = 0; k < totalColuna; k++) {
-					if(matrizD[j][k] == valor) {
-						 matrizR[matrizR.length-1][i] = matrizD[j][0]; 
+		/* ------------------- FUNÇÃO DA MATRIZ -----------------:
+		 * W = Tamanho da Linguagem
+		 * I = Posição Inicial
+		 * S = Resultado de (W - I)
+		 * R = Resultado de (I + 1)
+		 * 
+		 * Temos Então:
+		 * 
+		 * (W - I) = S ONDE I = 1;
+		 * S + (1) = R
+		 * 
+		 * ONDE O |R| É O NÚMERO DE CONJUNTO PERCORRIDOS;
+		 * */ 
+		
+		// Preenchimento da MATRIZ
+		
+		int w = linguagem.toCharArray().length;
+		int z = 1;		
+		
+		int inicio = 0;
+		int f = 1;
+		int fim = 1;
+		int q = linguagem.toCharArray().length;
+		
+		for(int k = 0; k < linguagem.toCharArray().length; k++) {	
+			if(k+1 == q) {
+			f++;	
+			k = -1;
+			inicio = 0;
+			fim = f;
+			q--;
+			if(f == linguagem.toCharArray().length) {
+				break;
+			}			
+			}else {
+				String resultado = "";
+				char valor = linguagem.charAt(k);
+				int r = calculoDaFuncao(w, z);			
+				for (int j = inicio; j < totalColuna; j++) {
+					if(j >= inicio && j <= fim) {
+						char v = linguagem.charAt(j);				 
+					    resultado = resultado.concat(String.valueOf(v));					
+					}else {
+						inicio++;
+						fim++;					
+						break;
 					}
-				}
+											
+					
+					}
+			}
 			}
 			
 		}
 		
-		
+	public int calculoDaFuncao(int w, int i) {
+		int s = w - i;
+		int r = s + 1;
+		return r;
+	}
 		
 		
 		// 1º Ler Linguagem
@@ -57,7 +103,7 @@ public class Algoritmo {
 		/*for(char c : linguagem.toCharArray()) {
 			
 		}*/
-	}	
+	
 	
 	public int tamanhoLinguagem() {
 		int contador = 0;
