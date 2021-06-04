@@ -1,21 +1,30 @@
 import java.util.Iterator;
 
 public class Algoritmo {
-	/*LEGENDA
+	/*
+	 * --------------LEGENDA------------------
 	 * matrizD => Matriz onde está a gramática
 	 * matrizR => Matriz onde está a resposta
 	 * 
 	 * */	
+	
+	        /*
+	         *1º Ler Linguagem
+			 *2º Verificar Gramática na matrizD
+			 *3º Inserir respota na matrizR
+			 *
+	         */
+	
 	
 	String linguagem;
 	int totalLinha;
 	int totalColuna;
 	int totalColuna_N_matriz;
 	int totalm;
-	int numeroColunasNovaMatriz;
+	//int numeroColunasNovaMatriz;
 	
-	char matrizD [][];
-	char matrizR [][];	
+	String matrizD [][];
+	String matrizR [][];	
 	
 	
 	boolean travaCriarMatrizR = false;
@@ -25,7 +34,7 @@ public class Algoritmo {
 	public void cyk() {
 		
 		
-		numeroColunasNovaMatriz = enxugarMatriz();
+		//numeroColunasNovaMatriz = enxugarMatriz();
 		//System.out.println("Número de colunas: " + numeroColunasNovaMatriz);
 		
 		/*Intancia matriz de Resposta*/
@@ -84,26 +93,24 @@ public class Algoritmo {
 											
 					
 					}
+				//System.out.print(resultado);
+				//System.out.println();
 			}
 			}
 			
 		}
 		
+	// COMPARAR LINGUAGEM COM A GRAMÁTICA
+	public void Compara_L_G() {
+		
+	}
+	
+	
 	public int calculoDaFuncao(int w, int i) {
 		int s = w - i;
 		int r = s + 1;
 		return r;
 	}
-		
-		
-		// 1º Ler Linguagem
-		// 2º Verificar Gramática na matrizD
-		// 3º Inserir respota na matrizR
-		
-		/*for(char c : linguagem.toCharArray()) {
-			
-		}*/
-	
 	
 	public int tamanhoLinguagem() {
 		int contador = 0;
@@ -113,47 +120,14 @@ public class Algoritmo {
 		return contador;
 	}	
 	
-	
-	public char[][] criarMatrizR() {
+	public String[][] criarMatrizR() {
 		int totalLinhasColunas = tamanhoLinguagem();
-		char m[][]= new char [totalLinhasColunas][totalLinhasColunas];
+		String m[][]= new String [totalLinhasColunas][totalLinhasColunas];
 		return m;
 	}
     
-	public int enxugarMatriz() {
-		// Enxugar Matriz para ficar com dados realmente necessários
-		
-		// Descobre quantidade de colunas da nova matriz
-	   if(travaCleanMatriz == false) {		   
-		  totalColuna_N_matriz = 0;
-		  totalm = 0;
-		   for (int i = 0; i < totalLinha; i++) {
-			 for (int j = 0; j < totalColuna; j++) {
-			    if(matrizD[i][j] != '*') {
-			    	if(j+1 <= totalColuna) {
-			    		if(j+1 == totalColuna) {
-			    			totalColuna_N_matriz++;
-			    		}else {
-			    			if(matrizD[i][j+1] != '*') {
-					    		totalColuna_N_matriz++;
-					    		j++;
-					    	}else {
-					    		totalColuna_N_matriz++;
-					    	}
-			    		}		    		
-			    		
-			    	}
-			    }
-		     }
-			 if(totalm < totalColuna_N_matriz) {
-				 totalm = totalColuna_N_matriz;
-			 }
-			 totalColuna_N_matriz = 0;
-		   }		  
-	   }				
-		return totalm;		
-	}
-    
+	
+	
 	
 	public void imprimirMatrizD() {
 		System.out.println("--------MATRIZ DA GRAMÁTICA---------");
@@ -184,14 +158,13 @@ public class Algoritmo {
 	
 	
 	// Getts e Setts
-	public void setMatrizD(char matriz[][]) {
+	public void setMatrizD(String matriz[][]) {
 		matrizD = matriz;
 	}
 	
 	public void setLiguagem(String linguagem) {
 		this.linguagem = linguagem;
 	}
-
 	
 	public void setTotalLinha(int linha) {
 		totalLinha = linha;
@@ -200,5 +173,46 @@ public class Algoritmo {
 	public void setTotalColuna(int coluna) {
 		totalColuna = coluna;
 	}
+	
+	
+	
+	
+	
+	
+   /*public int enxugarMatriz() {
+	// Enxugar Matriz para ficar com dados realmente necessários
+	
+	// Descobre quantidade de colunas da nova matriz
+   if(travaCleanMatriz == false) {		   
+	  totalColuna_N_matriz = 0;
+	  totalm = 0;
+	   for (int i = 0; i < totalLinha; i++) {
+		 for (int j = 0; j < totalColuna; j++) {
+		    if(matrizD[i][j] != '*') {
+		    	if(j+1 <= totalColuna) {
+		    		if(j+1 == totalColuna) {
+		    			totalColuna_N_matriz++;
+		    		}else {
+		    			if(matrizD[i][j+1] != '*') {
+				    		totalColuna_N_matriz++;
+				    		j++;
+				    	}else {
+				    		totalColuna_N_matriz++;
+				    	}
+		    		}		    		
+		    		
+		    	}
+		    }
+	     }
+		 if(totalm < totalColuna_N_matriz) {
+			 totalm = totalColuna_N_matriz;
+		 }
+		 totalColuna_N_matriz = 0;
+	   }		  
+   }				
+	return totalm;		
+}
+*/
+	
 	
 }

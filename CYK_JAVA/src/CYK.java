@@ -11,12 +11,12 @@ public class CYK {
 		
 		int linha;
 		int coluna;
-		char matriz[][];		
+		String matriz[][];		
 		
 		
 		// INSPECIONA ARQUIVO
 		arquivo.ler(caminho);
-		// COLOCA DADDOS DO ARQUIVO EM UMA MATRIZ
+		// COLOCA DADOS DO ARQUIVO EM UMA MATRIZ
 		arquivo.ler(caminho);	
 		
 		// Captura a matriz preenchida
@@ -30,9 +30,9 @@ public class CYK {
 		al.setMatrizD(matriz);
 		al.setLiguagem(linguagem);
 		
-		//arquivo.limparMatriz();
-		//arquivo.imprimirMatriz();
-		al.cyk();
+		
+		arquivo.imprimirMatriz();
+		//al.cyk();
 		//al.imprimirMatrizD();
 		//al.imprimirMatrizR();
 		

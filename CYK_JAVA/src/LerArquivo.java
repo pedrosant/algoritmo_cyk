@@ -9,13 +9,15 @@ public class LerArquivo {
 	int contador = 0;
 	int totalLinha = 0;
 	int totalColunas = 0;
+	int totalColunasV = 0;	
 	boolean travaCriarMatriz = false;
 	boolean travaPreencherMatriz = false;
 	boolean travaintanciarMatriz = false;
-	char [][] mat;
+	String [][] mat;
 	char [][] matrizLimpa;
 	int linhaMat = 0;
 	int colunaMat = 0;
+	
 	public void ler(String caminhoArquivo) {
 		
 		try {
@@ -63,33 +65,89 @@ public class LerArquivo {
 	}
 	
 	public void tamanhodaMatriz(String linha) {
+		String elemento = "";
 		// Separar por =>
 				String linhacompleta = linha;				
 				// Obtém maior número de colunas
-				if(totalColunas < linhacompleta.toCharArray().length) {
-					totalColunas = linhacompleta.toCharArray().length;
-				}				
+				linhacompleta =  linhacompleta.replace("=>", "");
+				linhacompleta =  linhacompleta.replace("|", "");
+				linhacompleta =  linhacompleta.replace("  ", " ");				
+				
+				for (int i = 0; i < linhacompleta.toCharArray().length; i++) {
+					char caracter = linhacompleta.charAt(i);
+					String valor = String.valueOf(caracter);
+					if(valor.equals(" ")) {
+						
+					}else {
+						elemento = elemento.concat(valor);
+						if(i+1 < linhacompleta.toCharArray().length) {
+							char c = linhacompleta.charAt(i+1);
+							String v = String.valueOf(c);
+							if(v.equals(" ")) {
+								totalColunasV ++;
+							}
+						}else {
+							totalColunasV ++;
+						}
+						
+						
+					}
+				}	
+				
+				if(totalColunas < totalColunasV) {
+					totalColunas = totalColunasV;
+				}	
+				totalColunasV = 0;
 				// Obtém maior número de linhas
 				totalLinha++;					
 	}
 	
-	public void pegarLinha(String linha) {		
-		String linhacompleta = linha;		
+	public void pegarLinha(String linha) {	
+		
+		String elemento = "";
+		// Separar por =>
+				String linhacompleta = linha;				
+				// Obtém maior número de colunas
+				linhacompleta =  linhacompleta.replace("=>", "");
+				linhacompleta =  linhacompleta.replace("|", "");
+				linhacompleta =  linhacompleta.replace("  ", " ");				
+				
+				for (int i = 0; i < linhacompleta.toCharArray().length; i++) {
+					char caracter = linhacompleta.charAt(i);
+					String valor = String.valueOf(caracter);
+					if(valor.equals(" ")) {
+						
+					}else {
+						elemento = elemento.concat(valor);
+						if(i+1 < linhacompleta.toCharArray().length) {
+							char c = linhacompleta.charAt(i+1);
+							String v = String.valueOf(c);
+							if(v.equals(" ")) {								
+								preencherMatriz(elemento);
+								colunaMat++;
+								elemento = "";
+							}
+						}						
+						
+					}
+				}
+				preencherMatriz(elemento);
+				linhaMat++;
+				colunaMat = 0;
+		/*String linhacompleta = linha;		
 		for(char c : linhacompleta.toCharArray()) {
 			//System.out.print(c);
 			preencherMatriz(c);
 			colunaMat++;
-		}		
-		linhaMat++;
-		colunaMat = 0;
+		}*/
 	}
 	
-	public char[][] criarMatriz() {
-		char matriz [][] = new char[totalLinha][totalColunas];			
+	public String[][] criarMatriz() {
+		String matriz [][] = new String[totalLinha][totalColunas];			
 		return matriz;
 	}
 	
-	public void preencherMatriz(char caracter) {		
+	public void preencherMatriz(String caracter) {		
 		if(travaintanciarMatriz == false) {
 			 mat = criarMatriz();
 			travaintanciarMatriz = true;
@@ -101,7 +159,7 @@ public class LerArquivo {
 		System.out.println("--------MATRIZ DA GRAMÁTICA---------");
 		for (int i = 0; i < totalLinha; i++) {
 			for (int j = 0; j < totalColunas; j++) {
-				System.out.print(mat[i][j]);
+				System.out.print(mat[i][j] + " ");
 			}
 			System.out.println();
 		}
@@ -112,21 +170,11 @@ public class LerArquivo {
 		return vetor[local];
 	}
 	
-	public void limparMatriz() {		
-		
-		for (int i = 0; i < totalLinha; i++) {
-			for (int j = 0; j < totalColunas; j++) {
-				if(mat[i][j] == '=' ||mat[i][j] == '>' || mat[i][j] == '|' || mat[i][j] == ' '){
-					mat[i][j] = '*';					
-				}
-			}
-		}
-	}
 	
 	
 	// Getts e Setts
-	public char[][] getMatriz() {
-		limparMatriz();
+	public String[][] getMatriz() {
+		//limparMatriz();
 		return mat;
 	}
 	
@@ -138,6 +186,15 @@ public class LerArquivo {
 		return totalColunas;
 	}
 	
+	/*public void limparMatriz() {		
 	
+	for (int i = 0; i < totalLinha; i++) {
+		for (int j = 0; j < totalColunas; j++) {
+			if(mat[i][j] == '=' ||mat[i][j] == '>' || mat[i][j] == '|' || mat[i][j] == ' '){
+				mat[i][j] = '*';					
+			}
+		}
+	}
+}*/
 	
 }
