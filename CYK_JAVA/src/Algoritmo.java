@@ -43,6 +43,10 @@ public class Algoritmo {
 			travaCriarMatrizR = true;
 		}		
 		
+		// Faz preenchimento da primeira linha
+		primeira_linha();
+		
+		
 		/* ------------------- FUNÇÃO DA MATRIZ -----------------:
 		 * W = Tamanho da Linguagem
 		 * I = Posição Inicial
@@ -103,6 +107,20 @@ public class Algoritmo {
 	// COMPARAR LINGUAGEM COM A GRAMÁTICA
 	public void Compara_L_G() {
 		
+	}
+	
+	public void primeira_linha() {
+		for(int i = 0; i < linguagem.toCharArray().length; i++) {
+			for (int j = 0; j < totalLinha; j++) {
+				for (int j2 = 0; j2 < totalColuna; j2++) {
+					String caracter = String.valueOf(linguagem.charAt(i));
+					String caracter2 = matrizD[j][j2];
+					if(caracter2.equals(caracter)) {
+						matrizR[matrizR.length-1][i] = matrizD[j][0];
+					}
+				}
+			}
+		}
 	}
 	
 	
