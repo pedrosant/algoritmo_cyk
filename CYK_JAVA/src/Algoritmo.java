@@ -21,6 +21,8 @@ public class Algoritmo {
 	int totalColuna;
 	int totalColuna_N_matriz;
 	int totalm;
+	int cv = 0;
+	int cd = 2;
 	//int numeroColunasNovaMatriz;
 	
 	String matrizD [][];
@@ -31,8 +33,7 @@ public class Algoritmo {
 	boolean travaCleanMatriz = false;
 	
 	
-	public void cyk() {
-		
+	public void cyk() {		
 		
 		//numeroColunasNovaMatriz = enxugarMatriz();
 		//System.out.println("Número de colunas: " + numeroColunasNovaMatriz);
@@ -42,7 +43,8 @@ public class Algoritmo {
 			matrizR = criarMatrizR();
 			travaCriarMatrizR = true;
 		}		
-		
+		int linhaAtualResposta = matrizR.length - 1;
+
 		// Faz preenchimento da primeira linha
 		primeira_linha();
 		
@@ -78,13 +80,15 @@ public class Algoritmo {
 			inicio = 0;
 			fim = f;
 			q--;
+			cd++;
+			cv = 0;
 			if(f == linguagem.toCharArray().length) {
 				break;
 			}			
 			}else {
 				String resultado = "";
 				char valor = linguagem.charAt(k);
-				int r = calculoDaFuncao(w, z);			
+				int possibilidades = calculoDaFuncao(w, z);			
 				for (int j = inicio; j < totalColuna; j++) {
 					if(j >= inicio && j <= fim) {
 						char v = linguagem.charAt(j);				 
@@ -97,6 +101,7 @@ public class Algoritmo {
 											
 					
 					}
+				compara_L_G(resultado, linhaAtualResposta, possibilidades);
 				//System.out.print(resultado);
 				//System.out.println();
 			}
@@ -105,9 +110,61 @@ public class Algoritmo {
 		}
 		
 	// COMPARAR LINGUAGEM COM A GRAMÁTICA
-	public void Compara_L_G() {
+	public void compara_L_G(String trechoLinguagem, int linhaVerificada, int numPossibilidades) {
 		
+		char trecho [] = trechoLinguagem.toCharArray();
+		//int tamanhoTrecho = trecho.length;
+		String dado = "";
+		String resultado = "";
+		int cvi = cv+cd; 
+		// percorrer matriz reposta para acessar os dados que já possuimos		
+			for (int j = cv; j < cvi; j++) {
+				dado = dado.concat(matrizR[linhaVerificada][j]);
+			}
+			if(trechoLinguagem.toCharArray().length > 2) {				
+					dividirTrecho(dado, numPossibilidades);									
+			}else {
+				procuratrecho(dado, resultado, linhaVerificada);
+			}
+			//procurar trecho não terminal na matriz de dados
+		    
+			
+			cv++;
+			resultado = "";
+			
 	}
+	
+	//procurar trecho não terminal na matriz de dados
+	public void procuratrecho(String dado, String resultado,int linhaVerificada) {
+		for(int i = 0; i < linguagem.toCharArray().length; i++) {
+			for (int j = 0; j < totalLinha; j++) {
+				for (int j2 = 0; j2 < totalColuna; j2++) {
+					String caracter = dado;
+					String caracter2 = matrizD[j][j2];
+					if(caracter2.equals(caracter)) {
+						if(matrizR[linhaVerificada-1][cv] != null){
+							resultado =  matrizR[linhaVerificada-1][cv];
+							resultado = resultado.concat(matrizD[j][0]);								
+							matrizR[linhaVerificada-1][cv] = resultado;
+						}else {
+							matrizR[linhaVerificada-1][cv] =  matrizD[j][0];
+						}							
+					}
+				}
+			}
+			break;				
+		}
+	}
+	
+	public void dividirTrecho(String dado, int possibilidades) {
+		char trecho [] = dado.toCharArray();
+		for (int i = 0; i < trecho.length; i++) {
+			for (int j = 0; j < trecho.length; j++) {
+				String conbinacoes[];
+			}
+		}
+	}
+	
 	
 	public void primeira_linha() {
 		for(int i = 0; i < linguagem.toCharArray().length; i++) {
@@ -122,7 +179,6 @@ public class Algoritmo {
 			}
 		}
 	}
-	
 	
 	public int calculoDaFuncao(int w, int i) {
 		int s = w - i;
@@ -162,7 +218,7 @@ public class Algoritmo {
 		System.out.println("--------MATRIZ CYK---------");
 		for (int i = 0; i < tamanho; i++) {
 			for (int j = 0; j < tamanho; j++) {				
-				System.out.print(matrizR[i][j] + "");
+				System.out.print(matrizR[i][j] + " | ");
 			}
 			System.out.println();
 		}
